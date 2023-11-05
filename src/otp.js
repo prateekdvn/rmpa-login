@@ -29,6 +29,12 @@ export default function OTP() {
       }
     };
 
+    const [showRightCol, setShowRightCol] = useState(false);
+
+    const handleEmployeeButtonClick = () => {
+      setShowRightCol(true);
+    };
+
   return (
       <>
         <div className='container'>
@@ -36,7 +42,7 @@ export default function OTP() {
               <img src={bgImp} alt='' /> 
               <div className='img-left-text'><h1 style={{fontWeight: 350, fontSize: "350%"}}>Rural Maps</h1></div>
           </div>
-          <div className='right-col'>
+          <div className='right-col' style={{ display: showRightCol ? 'block' : 'none' }}>
             <div className='centered'>
               <img src={logo} className='img' alt=''/>
             </div>
@@ -60,7 +66,10 @@ export default function OTP() {
             </form>
           </div>
           <div className='img-text'><h2 style={{fontWeight: 400}}>Dealers</h2></div>
-          <img src={emp} className='img-logo' alt='' />
+          <img src={emp} className='img-logo' alt='' 
+          onClick={handleEmployeeButtonClick}
+          style={{ cursor: 'pointer' }}
+          />
         </div>
       </>
   );
