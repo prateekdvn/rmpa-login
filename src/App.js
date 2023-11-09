@@ -15,34 +15,34 @@ function App() {
   const handleMSPSignIn = (e) => {
     e.preventDefault();
     
-    if (mspPin.length === 6) {
-      const sampleValues = ['123456', '654321', '987654', '456789', '111111'];
+    // if (mspPin.length === 6) {
+    //   const sampleValues = ['123456', '654321', '987654', '456789', '111111'];
 
-      if (sampleValues.includes(mspPin)) {
-        setShowOtpInput(true);
-        setWrongInput(''); 
-      } else {
-        setWrongInput('Wrong input. Please check your MSPIN.');
-      }
-    }
-
-    // axios.post('/validate-mspin', { mspPin })
-    // .then((response) => {
-    //   if (response.data.valid) {
+    //   if (sampleValues.includes(mspPin)) {
     //     setShowOtpInput(true);
-    //     setWrongInput('');
+    //     setWrongInput(''); 
     //   } else {
     //     setWrongInput('Wrong input. Please check your MSPIN.');
     //   }
-    // })
-    // .catch((error) => {
-    //   console.error(error);
-    //   setWrongInput('MSPIN not validated.');
-    // });
+    // }
+
+    axios.post('/validate-mspin', { mspPin })
+    .then((response) => {
+      if (response.data.valid) {
+        setShowOtpInput(true);
+        setWrongInput('');
+      } else {
+        setWrongInput('Wrong input. Please check your MSPIN.');
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      setWrongInput('MSPIN not validated.');
+    });
     
-    else {
-      setWrongInput('MSPIN should be 6 digits');
-    }
+    // else {
+    //   setWrongInput('MSPIN should be 6 digits');
+    // }
   };
 
   const handleOtpChange = (e, index) => {
@@ -112,7 +112,7 @@ function App() {
           className={`img-text ${showOtpInput ? '' : 'selected'}`}
           onClick={() => { setShowOtpInput(false); setWrongInput(''); }}    
         >
-        <h2 style={{ fontWeight: 400 }}>Dealers</h2>
+        <h2 className='dealers-heading'>Dealers</h2>
         </button>
 
         <button
@@ -121,7 +121,7 @@ function App() {
           onClick={() => { setShowOtpInput(true); setWrongInput(''); }} 
           style={{ borderTopLeftRadius: '20%', borderBottomLeftRadius: '20%' }}
         >
-          <h1 style={{ fontWeight: 400, color: '#00008B'}}>Employee</h1>
+          <h1 className='employee-heading'>Employee</h1>
         </button>
       {wrongInput && <div className='wrong-input-display' style={{display: 'block', top: '20px'}}>{wrongInput}</div>}
       </div>
