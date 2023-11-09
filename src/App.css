@@ -19,7 +19,7 @@
 
 .heading {
   font-weight: 350;
-  font-size: 350%;
+  font-size: 300%;
   text-align: center;
 }
 
@@ -88,9 +88,14 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 12%;
+  width: 13%;
   transform: translate(-100%, -50%);
   z-index: 1;
+}
+
+.img-text.selected,
+.img-logo.selected {
+  background-color: #9D9FA1;
 }
 
 #form {

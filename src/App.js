@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import bgImp from './images/login-backgrnd.png';
 import logo from './images/logo.png';
 import emp from './images/employee_logo.png';
+import axios from 'axios';
 
 function App() {
   const [showOtpInput, setShowOtpInput] = useState(false);
@@ -11,7 +12,9 @@ function App() {
   const otpInputRefs = [React.createRef(), React.createRef(), React.createRef(), React.createRef()];
   const [wrongInput, setWrongInput] = useState('');
 
-  const handleMSPSignIn = () => {
+  const handleMSPSignIn = (e) => {
+    e.preventDefault();
+    
     if (mspPin.length === 6) {
       const sampleValues = ['123456', '654321', '987654', '456789', '111111'];
 
@@ -75,7 +78,7 @@ function App() {
           <div className='centered'>
             <img src={logo} className='img' alt='' />
           </div>
-          <form id='form' className='flex flex-col'>
+          <form id='form' className='flex flex-col' onSubmit={handleMSPSignIn}>
             {showOtpInput ? (
               <>
                 <label style={{ color: "darkblue" }}>Enter your OTP</label>
@@ -107,15 +110,19 @@ function App() {
 
         <button
           className={`img-text ${showOtpInput ? '' : 'selected'}`}
-          onClick={() => { setShowOtpInput(false); setWrongInput(''); }}
+          onClick={() => { setShowOtpInput(false); setWrongInput(''); }}    
         >
-          <h2 style={{ fontWeight: 400 }}>Dealers</h2>
+        <h2 style={{ fontWeight: 400 }}>Dealers</h2>
         </button>
-        <img
+
+        <button
           src={emp}
           className={`img-logo ${showOtpInput ? 'selected' : ''}`}
-          onClick={() => { setShowOtpInput(true); setWrongInput(''); }}
-        />
+          onClick={() => { setShowOtpInput(true); setWrongInput(''); }} 
+          style={{ borderTopLeftRadius: '20%', borderBottomLeftRadius: '20%' }}
+        >
+          <h1 style={{ fontWeight: 400, color: '#00008B'}}>Employee</h1>
+        </button>
       {wrongInput && <div className='wrong-input-display' style={{display: 'block', top: '20px'}}>{wrongInput}</div>}
       </div>
     </>
